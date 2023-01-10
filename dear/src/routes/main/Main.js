@@ -276,7 +276,11 @@ function Main() {
                   </DivMid>
                 )}
             </>
-            <ButtonWrite onClick={() => navigate("/write/write1")}>
+            <ButtonWrite
+              onClick={() =>
+                navigate("/write/1", { state: { email: userEmail } })
+              }
+            >
               편지하러 가기
             </ButtonWrite>
           </>

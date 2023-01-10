@@ -7,14 +7,14 @@ import { IoIosArrowBack } from "react-icons/io";
 const KakaoLogin = () => {
   const navigate = useNavigate();
 
-  // let kakaoUrl = "http://localhost:8000/accounts/signin/kakao/";
-  // let kakaoCallbackUrl =
-  //   "http://localhost:8000/accounts/signin/kakao/callback/";
-
-  let kakaoUrl =
-    "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/signin/kakao/";
+  let kakaoUrl = "http://localhost:8000/accounts/signin/kakao/";
   let kakaoCallbackUrl =
-    "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/signin/kakao/callback/";
+    "http://localhost:8000/accounts/signin/kakao/callback/";
+
+  // let kakaoUrl =
+  //   "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/signin/kakao/";
+  // let kakaoCallbackUrl =
+  //   "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/signin/kakao/callback/";
   const onClickLogin = () => {
     window.location.href = kakaoUrl;
   };

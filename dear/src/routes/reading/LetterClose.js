@@ -123,9 +123,16 @@ const LetterClose = () => {
   let [currLetter, setCurrLetter] = useState({});
   const getLetter = async () => {
     await axios
-      .get("http://localhost:8000/letter/letter/", {
-        headers: { LetterId: `${letterId}` }, // userEmail 앞에서 받은 놈 넣어줍쇼
-      })
+      // .get("http://localhost:8000/letter/letter/", {
+
+      .get(
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/letter/letter/",
+        {
+          //for deploy
+
+          headers: { LetterId: `${letterId}` }, // userEmail 앞에서 받은 놈 넣어줍쇼
+        }
+      )
       .then((res) => {
         setDate(res.data);
         setCurrLetter(res.data);

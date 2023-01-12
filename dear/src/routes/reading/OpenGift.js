@@ -108,7 +108,12 @@ const OpenGift = () => {
 
   const isOpened = async () => {
     await axios
-      .post("http://localhost:8000/letter/letter/", "", config)
+      // .post("http://localhost:8000/letter/letter/", "", config)
+      .post(
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/letter/letter/", //for deploy
+        "",
+        config
+      )
       .then((res) => {
         console.log(res.data.isOpened);
         console.log(res.data);

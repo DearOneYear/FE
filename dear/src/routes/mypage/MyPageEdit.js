@@ -47,7 +47,12 @@ const MyPageEdit = () => {
 
   const correct = async (data, config) => {
     await axios
-      .post("http://localhost:8000/accounts/mypage/", data, config)
+      // .post("http://localhost:8000/accounts/mypage/", data, config)
+      .post(
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/mypage/",
+        data,
+        config
+      ) // for deploy
       .then((res) => {
         console.log(res);
       })

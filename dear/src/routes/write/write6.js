@@ -80,7 +80,9 @@ function Write6() {
   };
   // 로그인 상태 체크 !!
   const userCheck = () => {
-    let tokenVerifyUrl = "http://localhost:8000/accounts/verify/";
+    // let tokenVerifyUrl = "http://localhost:8000/accounts/verify/";
+    let tokenVerifyUrl =
+      "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/verify/";
     const getDB = async () => {
       try {
         const response = await axios.get(`${tokenVerifyUrl}`, {

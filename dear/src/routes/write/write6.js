@@ -130,7 +130,11 @@ function Write6() {
     formData.append("file", finalImage);
 
     await axios
-      .post("http://localhost:8000/letter/letterbox/", formData)
+      // .post("http://localhost:8000/letter/letterbox/", formData)
+      .post(
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/letter/letterbox/", // for deploy
+        formData
+      )
       .then((res) => {
         console.log("편지 쓰기 성공");
         console.log(res.data);

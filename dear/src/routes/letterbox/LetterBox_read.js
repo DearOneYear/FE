@@ -33,9 +33,15 @@ const LetterBoxUnread = () => {
   // 이메일로 편지 목록 가져오기
   const getLetter = async () => {
     await axios
-      .get("http://localhost:8000/letter/letterbox/", {
-        headers: { Email: `Bearer ${email}` },
-      })
+      // .get("http://localhost:8000/letter/letterbox/", {
+      .get(
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/letter/letterbox/",
+        {
+          // for deploy
+
+          headers: { Email: `Bearer ${email}` },
+        }
+      )
       .then((res) => {
         setDbLetter([...res.data.letter]);
         setDbDday([...res.data.ddays]);

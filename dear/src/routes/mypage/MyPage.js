@@ -50,9 +50,13 @@ const MyPage = () => {
   // 이메일로 유저 정보 받아오기
   const getUserInfo = async () => {
     await axios
-      .get("http://localhost:8000/accounts/mypage/", {
-        headers: { Email: `Bearer ${email}` },
-      })
+      // .get("http://localhost:8000/accounts/mypage/", {
+      .get(
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/mypage/", //for deploy
+        {
+          headers: { Email: `Bearer ${email}` },
+        }
+      )
       .then((res) => {
         setDbUserInfo(res.data);
         birthbirth(res.data);
@@ -79,7 +83,9 @@ const MyPage = () => {
   const sendToken = async (kakaoToken) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/accounts/signout/kakao/",
+        // "http://localhost:8000/accounts/signout/kakao/",
+
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/signout/kakao/", //for deploy
         "",
         {
           headers: {

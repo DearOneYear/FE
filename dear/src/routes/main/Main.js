@@ -42,7 +42,8 @@ function Main() {
 
   // 로그인 상태 체크
   const userCheck = () => {
-    let tokenVerifyUrl = "http://localhost:8000/accounts/verify/";
+    let tokenVerifyUrl =
+      "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app//accounts/verify/";
 
     const getDB = async () => {
       try {
@@ -88,9 +89,12 @@ function Main() {
   let [dbDday, setDbDday] = useState([]);
   const getLetter = async (userEmail) => {
     await axios
-      .get("http://localhost:8000/letter/letterbox/", {
-        headers: { Email: `Bearer ${userEmail}` },
-      })
+      .get(
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/letter/letterbox/",
+        {
+          headers: { Email: `Bearer ${userEmail}` },
+        }
+      )
       .then((res) => {
         setDbLetter([...res.data.letter]);
         setDbDday([...res.data.ddays]);

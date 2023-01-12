@@ -11,6 +11,7 @@ const KakaoLogin = () => {
   // let kakaoCallbackUrl =
   //   "http://localhost:8000/accounts/signin/kakao/callback/";
 
+  // for deploy
   let kakaoUrl =
     "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/signin/kakao/";
   let kakaoCallbackUrl =

@@ -43,7 +43,8 @@ function Main() {
   // 로그인 상태 체크
   const userCheck = () => {
     let tokenVerifyUrl =
-      "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app//accounts/verify/";
+      "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/verify/"; // for deploy
+    // "http://localhost:8000/accounts/verify/";
 
     const getDB = async () => {
       try {
@@ -90,7 +91,9 @@ function Main() {
   const getLetter = async (userEmail) => {
     await axios
       .get(
-        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/letter/letterbox/",
+        "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/letter/letterbox/", // for deploy
+        // "http://localhost:8000/letter/letterbox/",
+
         {
           headers: { Email: `Bearer ${userEmail}` },
         }

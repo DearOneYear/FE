@@ -114,6 +114,7 @@ const OpenPhoto = () => {
     let s = currLetter.image.split("/");
     currLetter.photoName = s[s.length - 1];
   };
+  console.log(currLetter);
 
   useEffect(() => {
     getLetter();

@@ -16,7 +16,6 @@ const ReadingLetter = () => {
   const getLetter = async () => {
     await axios
       // .get("http://localhost:8000/letter/letter/", {
-
       .get(
         "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/letter/letter/", // for deploy
         {

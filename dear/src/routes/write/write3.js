@@ -8,8 +8,17 @@ function Write3() {
   const [nextBtn, setNextBtn] = useState("disabled");
   const navigate = useNavigate();
 
-  // 1년 후
   const [selectedDate, setChangeText] = useState("");
+
+  let sessionDay = sessionStorage.getItem("selectedDate");
+  const getSession = () => {
+    if (sessionDay !== null) {
+      setChangeText(sessionDay);
+      setNextBtn("");
+    }
+  };
+
+  // 1년 후
 
   const oneYearLater = () => {
     let now = new Date();
@@ -85,6 +94,7 @@ function Write3() {
     day = "0" + day;
   }
   let availableDay = `${year}-${month}-${day}`;
+  let max5Years = `${year + 5}-${month}-${day}`;
 
   // 기간 안내 문구
   function input() {
@@ -95,6 +105,7 @@ function Write3() {
 
   useEffect(() => {
     getUserInfo();
+    getSession();
   }, []);
   return (
     <CenterWrapper>
@@ -112,6 +123,7 @@ function Write3() {
             <input
               type="date"
               min={availableDay}
+              max={max5Years}
               id="input_date"
               onChange={input}
             ></input>
@@ -120,9 +132,10 @@ function Write3() {
           </DivButtons>
           <ButtonNext
             disabled={nextBtn}
-            onClick={() =>
-              navigate("/write/2", { state: { selectedDate: selectedDate } })
-            }
+            onClick={() => {
+              navigate("/write/2", { state: { selectedDate: selectedDate } });
+              sessionStorage.setItem("selectedDate", selectedDate);
+            }}
           >
             다음으로
           </ButtonNext>

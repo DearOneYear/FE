@@ -32,6 +32,8 @@ function Write6() {
   const [finalText, setFinalText] = useState("");
   const [finalFromName, setFinalFromName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+
+  const [currTextLength, setCurrTextLength] = useState(0);
   const navigate = useNavigate();
 
   function FinalToName(e) {
@@ -43,6 +45,8 @@ function Write6() {
 
   function FinalText(e) {
     setFinalText(e.target.value);
+    console.log(e.target.value.length);
+    setCurrTextLength(e.target.value.length);
     if (finalToName !== "" && finalFromName !== "" && finalText !== "") {
       setNextBtn("");
     }
@@ -80,9 +84,9 @@ function Write6() {
   };
   // 로그인 상태 체크 !!
   const userCheck = () => {
-    // let tokenVerifyUrl = "http://localhost:8000/accounts/verify/";
-    let tokenVerifyUrl =
-      "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/verify/";
+    let tokenVerifyUrl = "http://localhost:8000/accounts/verify/";
+    // let tokenVerifyUrl =
+    //   "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/verify/";
     const getDB = async () => {
       try {
         const response = await axios.get(`${tokenVerifyUrl}`, {
@@ -152,7 +156,7 @@ function Write6() {
   };
   const cancelConfirm = () => console.log("취소했습니다.");
   const confirmDelete = useConfirm(
-    "편지를 보낸 후에는 수정 및 삭제가 불가능합니다.편지를 보내시겠어요?",
+    "편지를 보낸 후에는 수정 및 삭제가 불가능합니다.\n편지를 보내시겠어요?",
     confirmSend,
     cancelConfirm
   );
@@ -171,34 +175,39 @@ function Write6() {
             소중한 마음을 담아<br></br>편지를 작성해주세요.
           </PComment>
 
-          <span>To. </span>
           <input
             id="finaltoname"
             type="text"
             required
             maxLength="20"
             onChange={FinalToName}
+            placeholder="받는 이"
           ></input>
+          <span>{currTextLength}/1000자</span>
+
           <br></br>
-          <input
+          <textarea
             type="text"
             rows="50"
             cols="100"
             required
             maxLength="1000"
             id="finaltext"
+            style={{ width: "70vw", height: "30vh" }}
             onChange={FinalText}
-          ></input>
+            placeholder="미래의 나에게 편지를 보내보세요."
+          ></textarea>
           <br></br>
-          <span>From. </span>
           <input
             type="text"
             required
             maxLength="20"
             id="finalfromname"
             onChange={FinalFromName}
+            placeholder="보내는 이"
           ></input>
 
+          <br />
           <br />
           <button disabled={nextBtn} onClick={confirmDelete}>
             편지 보내기

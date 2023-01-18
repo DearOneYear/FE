@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
@@ -16,6 +16,18 @@ function Write4() {
 
   // 다음 버튼
   const [nextBtn, setNextBtn] = useState("disabled");
+
+  let sessionEmotion = sessionStorage.getItem("emotion");
+  const getSession = () => {
+    if (sessionEmotion !== null) {
+      setEmotion(sessionEmotion);
+      setNextBtn("");
+    }
+  };
+
+  useEffect(() => {
+    getSession();
+  }, []);
 
   return (
     <CenterWrapper>
@@ -43,13 +55,17 @@ function Write4() {
             </ButtonEmotion>
             <ButtonEmotion onClick={ClickEmotion}>혼자 있고 싶은</ButtonEmotion>
           </DivEmotions>
+          <br />
+          <p>{emotion}</p>
+          <br />
           <ButtonNext
             disabled={nextBtn}
-            onClick={() =>
+            onClick={() => {
               navigate("/write/3", {
                 state: { selectedDate: selectedDate, emotion: emotion },
-              })
-            }
+              });
+              sessionStorage.setItem("emotion", emotion);
+            }}
           >
             다음으로
           </ButtonNext>

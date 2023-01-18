@@ -146,6 +146,7 @@ function Main() {
   useEffect(() => {
     getCookie();
     userCheck();
+    sessionStorage.clear();
   }, []);
 
   return (

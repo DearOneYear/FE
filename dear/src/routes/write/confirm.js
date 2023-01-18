@@ -3,6 +3,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 function Confirm() {
   const navigate = useNavigate();
@@ -29,6 +30,10 @@ function Confirm() {
     document.body.removeChild(textArea);
     alert("링크가 복사되었습니다.");
   };
+
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
 
   return (
     <Container>
@@ -66,7 +71,6 @@ function Confirm() {
 
         <Text1>당신께 찾아갈게요!</Text1>
 
-        <Btn1 onClick={onShareClick}>받는 이에게 편지 링크 공유하기</Btn1>
         <Button2>
           <Btn2
             onClick={() =>

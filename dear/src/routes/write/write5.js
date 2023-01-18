@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MdAddPhotoAlternate } from "react-icons/md";
 
 function Write5() {
   const navigate = useNavigate();
@@ -10,13 +11,14 @@ function Write5() {
 
   // let finalImage;
   const [finalImage, setFinalImage] = useState("");
+  const [preview, setPreview] = useState("");
+
   const setThumbnail = (e) => {
     let reader = new FileReader();
-
     reader.onload = function (e) {
-      let img = document.createElement("img");
-      img.setAttribute("src", e.target.result);
-      document.querySelector("div#image_container").appendChild(img);
+      setPreview(
+        `<image style='border: 2rem solid white; width: 70%; height: 70%;' id="inputFile" src=${e.target.result}></image>`
+      );
     };
     // finalImage =
     setFinalImage(e.target.files[0]);
@@ -35,29 +37,56 @@ function Write5() {
         </DivTop>
         <DivMid>
           <PComment>추억할 사진을 첨부해 주세요.</PComment>
-          <div>
-            <input
-              type="file"
-              name="profile_img"
-              onChange={setThumbnail}
-              accept="image/*"
-              required
-            ></input>
-            <div id="image_container"></div>
-            <input
-              type="submit"
-              value="편지 내용 쓰기"
-              disabled={nextBtn}
-              onClick={() =>
-                navigate("/write/4", {
-                  state: {
-                    selectedDate: selectedDate,
-                    emotion: emotion,
-                    finalImage: finalImage,
-                  },
-                })
-              }
-            ></input>
+          <div
+            style={{
+              border: "2rem solid white",
+              backgroundColor: "white",
+            }}
+          >
+            <div dangerouslySetInnerHTML={{ __html: preview }}></div>
+
+            <center>
+              {/* <label
+                for="inputFile"
+                style={{
+                  padding: `6px 25px`,
+                  backgroundColor: `gray`,
+                  borderRadius: `4px`,
+                  color: `white`,
+                  cursor: `pointer`,
+                }}
+              >
+                <MdAddPhotoAlternate />
+                사진 넣기
+              </label>
+              <br />
+              <br />
+              <br /> */}
+              <input
+                id="inputFile"
+                type="file"
+                name="profile_img"
+                onChange={setThumbnail}
+                accept="image/*"
+                required
+                // style={{ display: "none" }}
+              ></input>
+              {/* <div id="image_container"></div> */}
+              <input
+                type="submit"
+                value="편지 내용 쓰기"
+                disabled={nextBtn}
+                onClick={() => {
+                  navigate("/write/4", {
+                    state: {
+                      selectedDate: selectedDate,
+                      emotion: emotion,
+                      finalImage: finalImage,
+                    },
+                  });
+                }}
+              ></input>
+            </center>
           </div>
         </DivMid>
       </MainWrapper>

@@ -182,7 +182,9 @@ const LetterBoxUnread = () => {
               </div>
             ))}
           </DivMid>
-          <ButtonWrite onClick={() => navigate("/write/write1")}>
+          <ButtonWrite
+            onClick={() => navigate("/write/1", { state: { email: email } })}
+          >
             새로운 편지하러 가기
           </ButtonWrite>
         </>

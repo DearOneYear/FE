@@ -101,6 +101,61 @@ const OpenGift = () => {
   let letterId = parseInt(urlArr[urlArr.length - 2]);
   console.log(letterId);
 
+  // 유저 이메일
+  // 전역 변수
+  let access_token = "";
+  let [userEmail, setUserEmail] = useState("");
+  let [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // 쿠키 받기
+  const getCookie = () => {
+    let cookie = document.cookie.split("; ");
+    let cookieArr = [];
+    if (cookie.length !== 0) {
+      cookie.map((e) => {
+        let c = e.split("=");
+        cookieArr.push(c);
+      });
+    }
+
+    // 쿠키 속 access_token 받기
+    let key = [];
+    cookieArr.map((e) => {
+      key.push(e[0]);
+    });
+    if (key.includes("access_token") === true) {
+      let indexAccessToken = key.indexOf("my_access_token");
+      access_token = cookieArr[indexAccessToken][1];
+    }
+    userCheck();
+  };
+
+  // 로그인 상태 체크
+  const userCheck = () => {
+    let tokenVerifyUrl =
+      "https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/accounts/verify/"; // for deploy
+    // "http://localhost:8000/accounts/verify/";
+
+    const getDB = async () => {
+      try {
+        const response = await axios.get(`${tokenVerifyUrl}`, {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        });
+
+        if (response.data.email.length !== 0) {
+          setUserEmail(response.data.email);
+          setIsLoggedIn(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDB();
+  };
+  console.log(userEmail);
+
   // 편지 읽음 처리 해주기 isOpened
   const config = {
     headers: { letterid: letterId },
@@ -125,13 +180,17 @@ const OpenGift = () => {
 
   useEffect(() => {
     isOpened();
+    getCookie();
+    userCheck();
   }, []);
   return (
     <Container>
       <Header>
         <Title>편지 읽기</Title>
         <IoIosArrowBack
-          onClick={() => navigate(-1)}
+          onClick={() =>
+            navigate("/letterbox/unread", { state: { email: userEmail } })
+          }
           style={{
             position: "relative",
             width: "2.125rem",
